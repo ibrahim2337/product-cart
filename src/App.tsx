@@ -1,6 +1,6 @@
 import Footer from "./app/Footer/Footer";
 import Navbar from "./app/Navbar/Navbar";
-import Products from "./app/Navbar/Products/Products";
+import Products from "./app/Products/Products";
 
 function App() {
   return (
