@@ -44,9 +44,9 @@ const Products = () => {
   return (
     <div className="container mx-auto p-6">
       <h2 className="text-2xl md:text-3xl font-bold text-center mb-6">
-        Our Current <span className="text-teal-500">Flash Sales</span> Items
+        Our Current <span className="text-teal-500">Popular</span> Items
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2  md:grid-cols-3 lg:grid-cols-4 gap-6">
         {product.map((products) => (
           <div
             key={products.id}
@@ -59,24 +59,28 @@ const Products = () => {
                 className="w-full object-cover"
               />
             </div>
-            <h3 className="text-lg font-semibold mt-4">{products.name}</h3>
+            <h3 className="md:text-lg text-sm font-semibold mt-4 line-clamp-1">
+              {products.name}
+            </h3>
             <div className="flex items-center my-2">
               {Array.from({ length: 5 }).map((_, i) => (
                 <Star
                   key={i}
-                  className={`w-4 h-4 ${
+                  className={`md:w-4 md:h-4 w-3 h-3 ${
                     i < products.rating ? "text-yellow-500" : "text-gray-300"
                   }`}
                 />
               ))}
             </div>
-            <div className="text-lg font-bold text-gray-900">
+            <div className="md:text-lg text-md font-bold text-gray-900">
               ৳{products.price.toFixed(2)}
               <span className="text-gray-500 line-through text-sm ml-2">
                 ৳{products.originalPrice}
               </span>
             </div>
-            <Button className="w-full bg-teal-500 mt-4">Add To Cart</Button>
+            <Button className="w-full bg-teal-500 text-white hover:bg-white hover:border-2 hover:border-teal-500 hover:text-teal-500 mt-4">
+              Add To Cart
+            </Button>
           </div>
         ))}
       </div>

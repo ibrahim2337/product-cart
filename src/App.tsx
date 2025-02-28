@@ -1,3 +1,4 @@
+import Footer from "./app/Footer/Footer";
 import Navbar from "./app/Navbar/Navbar";
 import Products from "./app/Navbar/Products/Products";
 
@@ -6,6 +7,7 @@ function App() {
     <div>
       <Navbar></Navbar>
       <Products />
+      <Footer />
     </div>
   );
 }
