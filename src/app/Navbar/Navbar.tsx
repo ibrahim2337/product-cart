@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Navbar() {
   return (
-    <nav className="flex items-center justify-between lg:px-20 px-5 py-5 shadow-md bg-white">
+    <nav className="flex items-center justify-between lg:px-20 px-5 py-5 shadow-md ">
       {/* Logo */}
       <div className="text-xl font-bold">ShopEase</div>
 
