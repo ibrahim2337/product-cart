@@ -5,7 +5,7 @@ import Products from "./app/Products/Products";
 function App() {
   return (
     <div>
-      <Navbar></Navbar>
+      <Navbar />
       <Products />
       <Footer />
     </div>

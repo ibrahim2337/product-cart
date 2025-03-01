@@ -1,11 +1,10 @@
-import { Button } from "@/components/ui/button";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa"; // Import icons
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-800 text-white py-8">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+    <footer className="bg-gray-800  text-white py-8">
+      <div className="container mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 justify-around gap-8">
           {/* About Us */}
           <div>
             <div className="text-2xl font-bold">
@@ -53,26 +52,6 @@ const Footer = () => {
                 <FaTwitter className="text-xl" />
               </a>
             </div>
-          </div>
-
-          {/* Newsletter */}
-          <div>
-            <h3 className="text-xl font-semibold mb-4">Newsletter</h3>
-            <p className="text-sm mb-4">
-              Subscribe to get the latest news, offers, and discounts.
-            </p>
-            <form>
-              <div className="flex space-x-2">
-                <input
-                  type="email"
-                  placeholder="Your Email"
-                  className="p-2 rounded-md border"
-                />
-                <Button className="bg-teal-500 hover:bg-white hover:text-teal-500 text-white">
-                  Subscribe
-                </Button>
-              </div>
-            </form>
           </div>
         </div>
         <div className="border-t border-gray-600 mt-8 pt-4 text-center text-sm">

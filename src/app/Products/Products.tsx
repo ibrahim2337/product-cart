@@ -42,11 +42,11 @@ const product = [
 
 const Products = () => {
   return (
-    <div className="container mx-auto p-6">
+    <div className="container mx-auto py-10">
       <h2 className="text-2xl md:text-3xl font-bold text-center mb-6">
         Our Current <span className="text-teal-500">Popular</span> Items
       </h2>
-      <div className="grid grid-cols-2  md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {product.map((products) => (
           <div
             key={products.id}

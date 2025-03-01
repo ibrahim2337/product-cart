@@ -1,185 +1,68 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { X, Trash } from "lucide-react";
+import { Trash } from "lucide-react";
 
-// Define the cart item type
-interface CartItem {
-  id: string;
-  name: string;
-  price: number;
-  quantity: number;
-  image: string;
-}
-
-// Props for the CartModal component
-interface CartModalProps {
-  onClose: () => void;
-  initialCartItems?: CartItem[];
-}
-
-export default function CartModal({
-  onClose,
-  initialCartItems = [],
-}: CartModalProps) {
-  // State for cart items
-  const [cartItems, setCartItems] = useState<CartItem[]>(
-    initialCartItems.length > 0
-      ? initialCartItems
-      : [
-          {
-            id: "1",
-            name: "Classic Sneakers",
-            price: 89.99,
-            quantity: 1,
-            image:
-              "https://cdn.bitcommerz.com/manfarebd/media/1726496302507-manfarebd-id-13.jpeg",
-          },
-        ]
-  );
-
-  // Function to increase item quantity
-  const onIncreaseQuantity = (id: string) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
-      )
-    );
-  };
-
-  // Function to decrease item quantity
-  const onDecreaseQuantity = (id: string) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id && item.quantity > 1
-          ? { ...item, quantity: item.quantity - 1 }
-          : item
-      )
-    );
-  };
-
-  // Function to remove product from cart
-  const onRemoveProduct = (id: string) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
-  };
-
-  // Function to calculate total price
-  const getTotalPrice = () => {
-    return cartItems.reduce(
-      (total, item) => total + item.price * item.quantity,
-      0
-    );
-  };
+const CartModal = ({ cartItems, onClose }) => {
+  // মোট মূল্য গণনা
+  const totalPrice = cartItems.reduce((total, item) => total + item.price, 0);
 
   return (
-    <div
-      className="fixed inset-0  bg-opacity-50 flex justify-end z-50"
-      onClick={onClose}
-    >
-      <div
-        className="bg-white w-full max-w-[450px] p-6 h-full overflow-y-auto shadow-lg relative"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <Button
-          variant="ghost"
-          className="absolute top-2 right-2"
-          onClick={onClose}
-        >
-          <X className="w-6 h-6 text-gray-500" />
-        </Button>
-
+    <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center">
+      <div className="bg-white p-6 rounded-lg w-11/12 md:w-1/2 lg:w-1/3">
         <h2 className="text-xl font-bold mb-4">Your Cart</h2>
 
+        {/* কার্ট আইটেমগুলি দেখানো */}
         {cartItems.length === 0 ? (
-          <div className="py-8 text-center text-gray-500">
-            Your cart is empty
-          </div>
+          <p>Your cart is empty.</p>
         ) : (
-          <div className="space-y-4">
+          <ul className="space-y-4">
             {cartItems.map((item) => (
-              <div
-                key={item.id}
-                className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b pb-4"
-              >
-                <div className="flex items-center space-x-3">
+              <li key={item.id} className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
                   <img
-                    src={item.image || "/placeholder.svg"}
+                    src={item.image}
                     alt={item.name}
-                    width={64}
-                    height={64}
-                    className="w-16 h-16 object-cover rounded"
+                    className="w-12 h-12 object-cover rounded"
                   />
                   <div>
-                    <div className="font-semibold">{item.name}</div>
-                    <div className="text-sm text-gray-500">
-                      Price: ${item.price.toFixed(2)}
-                    </div>
+                    <p className="font-semibold">{item.name}</p>
+                    <p className="text-sm text-gray-600">
+                      ৳{item.price.toFixed(2)}
+                    </p>
                   </div>
                 </div>
-
-                <div className="flex items-center space-x-2 self-end sm:self-auto">
-                  <Button
-                    variant="outline"
-                    onClick={() => onDecreaseQuantity(item.id)}
-                    disabled={item.quantity <= 1}
-                    className="px-2 py-1 h-8 text-primary border border-primary"
-                    aria-label="Decrease quantity"
-                  >
-                    -
-                  </Button>
-                  <span className="w-8 text-center">{item.quantity}</span>
-                  <Button
-                    variant="outline"
-                    onClick={() => onIncreaseQuantity(item.id)}
-                    className="px-2 py-1 h-8 text-primary border border-primary"
-                    aria-label="Increase quantity"
-                  >
-                    +
-                  </Button>
-                </div>
-
-                <div className="flex items-center gap-2 self-end sm:self-auto">
-                  <div className="text-lg font-semibold">
-                    ${(item.price * item.quantity).toFixed(2)}
-                  </div>
-
-                  <Button
-                    variant="ghost"
-                    onClick={() => onRemoveProduct(item.id)}
-                    className="text-red-500 p-1 h-8"
-                    aria-label="Remove item"
-                  >
-                    <Trash className="w-5 h-5" />
-                  </Button>
-                </div>
-              </div>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-red-500 hover:bg-red-50"
+                >
+                  <Trash className="w-5 h-5" />
+                </Button>
+              </li>
             ))}
+          </ul>
+        )}
+
+        {/* মোট মূল্য এবং বাটনগুলি */}
+        <div className="mt-6">
+          <div className="flex justify-between items-center">
+            <p className="font-semibold">Total:</p>
+            <p className="font-bold">৳{totalPrice.toFixed(2)}</p>
           </div>
-        )}
-
-        {cartItems.length > 0 && (
-          <>
-            <div className="mt-6 text-lg font-semibold flex justify-between">
-              <span>Total:</span>
-              <span>${getTotalPrice().toFixed(2)}</span>
-            </div>
-
-            <div className="mt-6">
-              <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
-                Proceed to Checkout
-              </Button>
-            </div>
-          </>
-        )}
-
-        {/* <div className="mt-6">
-          <Button
-            className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/90"
-            onClick={onAddProductToCart}
-          >
-            Add Classic Sneakers to Cart
-          </Button>
-        </div> */}
+          <div className="flex justify-end space-x-2 mt-4">
+            <Button
+              onClick={onClose}
+              className="bg-gray-500 text-white hover:bg-gray-600"
+            >
+              Close
+            </Button>
+            <Button className="bg-teal-500 text-white hover:bg-teal-600">
+              Checkout
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
   );
-}
+};
+
+export default CartModal;
