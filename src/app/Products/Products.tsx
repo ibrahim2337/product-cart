@@ -78,7 +78,7 @@ const Products = () => {
                 ৳{products.originalPrice}
               </span>
             </div>
-            <Button className="w-full bg-teal-500 text-white hover:bg-white hover:border-2 hover:border-teal-500 hover:text-teal-500 mt-4">
+            <Button className="w-full bg-teal-500 text-white hover:bg-white hover:border-2 hover:border-teal-500 hover:text-teal-500 font-semibold mt-4">
               Add To Cart
             </Button>
           </div>

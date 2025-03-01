@@ -1,63 +1,71 @@
-import { Button } from "@/components/ui/button";
-import { Trash } from "lucide-react";
-
-const CartModal = ({ cartItems, onClose }) => {
-  // মোট মূল্য গণনা
-  const totalPrice = cartItems.reduce((total, item) => total + item.price, 0);
-
+const CartModal = ({ closeModal }) => {
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center">
-      <div className="bg-white p-6 rounded-lg w-11/12 md:w-1/2 lg:w-1/3">
-        <h2 className="text-xl font-bold mb-4">Your Cart</h2>
+    <div className="fixed inset-0  bg-opacity-50 z-50 flex justify-center items-center">
+      <div className="container mx-auto p-5 bg-gray-800  text-white rounded-lg shadow-md relative">
+        {/* Close Button - Positioned at top right */}
+        <button
+          onClick={closeModal}
+          aria-label="Close Cart"
+          className="absolute top-4 right-4 text-white"
+        >
+          ✕
+        </button>
 
-        {/* কার্ট আইটেমগুলি দেখানো */}
-        {cartItems.length === 0 ? (
-          <p>Your cart is empty.</p>
-        ) : (
-          <ul className="space-y-4">
-            {cartItems.map((item) => (
-              <li key={item.id} className="flex items-center justify-between">
-                <div className="flex items-center space-x-4">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-12 h-12 object-cover rounded"
-                  />
-                  <div>
-                    <p className="font-semibold">{item.name}</p>
-                    <p className="text-sm text-gray-600">
-                      ৳{item.price.toFixed(2)}
-                    </p>
-                  </div>
-                </div>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="text-red-500 hover:bg-red-50"
-                >
-                  <Trash className="w-5 h-5" />
-                </Button>
-              </li>
-            ))}
-          </ul>
-        )}
+        <h1 className="text-2xl font-bold mb-6">Your Cart</h1>
 
-        {/* মোট মূল্য এবং বাটনগুলি */}
-        <div className="mt-6">
-          <div className="flex justify-between items-center">
-            <p className="font-semibold">Total:</p>
-            <p className="font-bold">৳{totalPrice.toFixed(2)}</p>
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+          <div className="bg-gray-800  text-white p-6 rounded-lg  col-span-3">
+            <div className="grid grid-cols-4 gap-4 font-bold border-b pb-2">
+              <div className="col-span-2">PRODUCT</div>
+              <div className="flex gap-10 col-span-2">
+                <div>PRICE</div>
+                <div>QUANTITY</div>
+                <div>TOTAL</div>
+              </div>
+            </div>
+
+            {/* Cart Item 1 */}
+            <div className="grid grid-cols-4 gap-4 items-center border-b py-4">
+              <div className="flex items-center col-span-2">
+                <img
+                  src="https://cdn.bitcommerz.com/manfarebd/media/1726496302507-manfarebd-id-13.jpeg"
+                  alt=""
+                  className="w-16 h-16 mr-4"
+                />
+                <span className="text-sm">
+                  Designer Edition Calligraphy T Shirt For Men
+                </span>
+              </div>
+              <div className="flex gap-10 col-span-2 text-sm">
+                <div>$120</div>
+                <div>2</div>
+                <div>$240</div>
+              </div>
+            </div>
           </div>
-          <div className="flex justify-end space-x-2 mt-4">
-            <Button
-              onClick={onClose}
-              className="bg-gray-500 text-white hover:bg-gray-600"
-            >
-              Close
-            </Button>
-            <Button className="bg-teal-500 text-white hover:bg-teal-600">
-              Checkout
-            </Button>
+
+          {/* Order Summary */}
+          <div className="col-span-1 px-5">
+            <div className="mt-6">
+              <h2 className="text-xl font-bold mb-4">Order Summary</h2>
+              <div className="flex justify-between mb-2">
+                <span>Subtotal</span>
+                <span>$418</span>
+              </div>
+              <div className="flex justify-between mb-2">
+                <span>Shipping</span>
+                <span>Free</span>
+              </div>
+              <div className="flex justify-between font-bold text-lg">
+                <span>Total</span>
+                <span>$418</span>
+              </div>
+            </div>
+            <div className="mt-6">
+              <button className="w-full py-1.5 rounded-md bg-teal-500 text-white hover:bg-white font-semibold hover:border-teal-500 hover:text-teal-500">
+                Checkout
+              </button>
+            </div>
           </div>
         </div>
       </div>
