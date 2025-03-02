@@ -20,7 +20,7 @@ export default function CartPage() {
 
   return (
     <div className="container mx-auto py-8 px-4">
-      <h1 className="text-2xl font-bold mb-6">Shopping Cart</h1>
+      <h1 className="text-3xl uppercase font-bold mb-6">Shopping Cart</h1>
 
       {products.length === 0 ? (
         <div className="mt-10 text-center text-3xl">Your cart is empty</div>
@@ -103,7 +103,7 @@ export default function CartPage() {
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <div className="bg-muted/30 rounded-md p-6">
+            <div className="bg-muted/90 rounded-md p-6">
               <h2 className="text-lg font-semibold mb-4">Order Summary</h2>
 
               <div className="space-y-4">
@@ -124,7 +124,7 @@ export default function CartPage() {
                   <span>BDT {subtotal}</span>
                 </div>
 
-                <Button className="w-full bg-green-600 hover:bg-green-700 text-white">
+                <Button className="cursor-pointer w-full bg-teal-500 text-white hover:bg-white hover:border-2 hover:border-teal-500 hover:text-teal-500 font-semibold">
                   CHECKOUT
                 </Button>
               </div>
